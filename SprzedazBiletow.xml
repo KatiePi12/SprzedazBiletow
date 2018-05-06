@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2017.1.1 (Build 111U_SU)" ts="2018-04-22 10:18:49">
+<Class name="SprzedazBiletow.Adres">
+<SqlTableName>Adres</SqlTableName>
+<Super>%Persistent,%Populate</Super>
+<TimeChanged>64760,35203.853925</TimeChanged>
+<TimeCreated>64759,56465.42616</TimeCreated>
+
+<Property name="Miasto">
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="VALUELIST" value=",Warszawa,Krakow,Poznan,Bydgoszcz"/>
+</Property>
+
+<Property name="Ulica">
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="VALUELIST" value=",Akacjowa,Zimowa,Wisniowa,Godowska"/>
+</Property>
+
+<Property name="NumerDomu">
+<Type>%Integer</Type>
+<Required>1</Required>
+<Parameter name="VALUELIST" value=",1,2,3"/>
+</Property>
+
+<Property name="NumerMieszkania">
+<Type>%Integer</Type>
+<Required>1</Required>
+<Parameter name="VALUELIST" value=",10,20,30"/>
+</Property>
+
+<Property name="KodPocztowy">
+<Type>%String</Type>
+<Required>1</Required>
+<Parameter name="VALUELIST" value=",26-689,21-564,65-353"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^SprzedazBiletow.AdresD</DataLocation>
+<DefaultData>AdresDefaultData</DefaultData>
+<IdLocation>^SprzedazBiletow.AdresD</IdLocation>
+<IndexLocation>^SprzedazBiletow.AdresI</IndexLocation>
+<StreamLocation>^SprzedazBiletow.AdresS</StreamLocation>
+<ExtentSize>12</ExtentSize>
+<Data name="AdresDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Miasto</Value>
+</Value>
+<Value name="3">
+<Value>Ulica</Value>
+</Value>
+<Value name="4">
+<Value>NumerDomu</Value>
+</Value>
+<Value name="5">
+<Value>NumerMieszkania</Value>
+</Value>
+<Value name="6">
+<Value>KodPocztowy</Value>
+</Value>
+</Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="%%ID">
+<Selectivity>1</Selectivity>
+<AverageFieldSize>1.25</AverageFieldSize>
+</Property>
+<Property name="KodPocztowy">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>6</AverageFieldSize>
+</Property>
+<Property name="Miasto">
+<Selectivity>25.0000%</Selectivity>
+<AverageFieldSize>7.42</AverageFieldSize>
+</Property>
+<Property name="NumerDomu">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="NumerMieszkania">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="Ulica">
+<Selectivity>25.0000%</Selectivity>
+<AverageFieldSize>7.17</AverageFieldSize>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
+</Storage>
+
+<Method name="wypiszAdres">
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+  Set wynik= ..Ulica_" "_..NumerDomu_" "_..NumerMieszkania_" "_..Miasto_" "_..KodPocztowy
+  Return wynik
+]]></Implementation>
+</Method>
+</Class>
+
+
+<Class name="SprzedazBiletow.Bilet">
+<SqlTableName>Bilet</SqlTableName>
+<Super>%Persistent,%Populate</Super>
+<TimeChanged>64760,35532.761149</TimeChanged>
+<TimeCreated>64759,76912.480698</TimeCreated>
+
+<Property name="posiada">
+<Type>SprzedazBiletow.Znizka</Type>
+<Cardinality>one</Cardinality>
+<Inverse>jestNadana</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="jestSprzedany">
+<Type>SprzedazBiletow.Dworzec</Type>
+<Cardinality>one</Cardinality>
+<Inverse>sprzedal</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="jestKupiony">
+<Type>SprzedazBiletow.Klient</Type>
+<Cardinality>one</Cardinality>
+<Inverse>zakupil</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="cena">
+<Type>%Integer</Type>
+<Parameter name="VALUELIST" value=",200,250,300"/>
+</Property>
+
+<Property name="skad">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Warszawa,Kraków,Gdańsk,Katowice"/>
+</Property>
+
+<Property name="dokad">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Wrocław,Lublin,Białystok,Szczecin"/>
+</Property>
+
+<Property name="nrPeronu">
+<Type>%Integer</Type>
+<Parameter name="VALUELIST" value=",1,2,3,4"/>
+</Property>
+
+<Property name="dataZakupu">
+<Type>%DateTime</Type>
+<Parameter name="VALUELIST" value=",2018-05-10 18:38:00 ,2018-04-15 18:20:00 ,2018-05-03 16:15:00"/>
+</Property>
+
+<Property name="dataOdjazdu">
+<Type>%DateTime</Type>
+<Parameter name="VALUELIST" value=",2018-05-15 11:35:00 ,2018-05-15 10:26:00 ,2018-05-15 13:17:00"/>
+</Property>
+
+<Property name="dataPrzyjazdu">
+<Type>%DateTime</Type>
+<Parameter name="VALUELIST" value=",2018-05-15 18:38:00 ,2018-05-15 18:20:00 ,2018-05-15 16:15:00"/>
+</Property>
+
+<Method name="cenaPoZnizce">
+<ReturnType>%Integer</ReturnType>
+<Implementation><![CDATA[
+ Set znizka= ..posiada.pobierzZnizke()
+ Set wynik= ..cena-znizka
+ Return wynik
+]]></Implementation>
+</Method>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^SprzedazBiletow.BiletD</DataLocation>
+<DefaultData>BiletDefaultData</DefaultData>
+<IdLocation>^SprzedazBiletow.BiletD</IdLocation>
+<IndexLocation>^SprzedazBiletow.BiletI</IndexLocation>
+<StreamLocation>^SprzedazBiletow.BiletS</StreamLocation>
+<ExtentSize>5</ExtentSize>
+<Data name="BiletDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>posiada</Value>
+</Value>
+<Value name="3">
+<Value>jestSprzedany</Value>
+</Value>
+<Value name="4">
+<Value>jestKupiony</Value>
+</Value>
+<Value name="5">
+<Value>cenaZakupu</Value>
+</Value>
+<Value name="6">
+<Value>skad</Value>
+</Value>
+<Value name="7">
+<Value>dokad</Value>
+</Value>
+<Value name="8">
+<Value>nrPeronu</Value>
+</Value>
+<Value name="9">
+<Value>dataZakupu</Value>
+</Value>
+<Value name="10">
+<Value>dataOdjazdu</Value>
+</Value>
+<Value name="11">
+<Value>dataPrzyjazdu</Value>
+</Value>
+<Value name="12">
+<Value>cena</Value>
+</Value>
+</Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="%%ID">
+<Selectivity>1</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="cena">
+<Selectivity>50.0000%</Selectivity>
+<AverageFieldSize>3</AverageFieldSize>
+</Property>
+<Property name="dataOdjazdu">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>19</AverageFieldSize>
+</Property>
+<Property name="dataPrzyjazdu">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>19</AverageFieldSize>
+</Property>
+<Property name="dataZakupu">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>19</AverageFieldSize>
+</Property>
+<Property name="dokad">
+<Selectivity>50.0000%</Selectivity>
+<AverageFieldSize>7.2</AverageFieldSize>
+</Property>
+<Property name="jestKupiony">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="jestSprzedany">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="nrPeronu">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="posiada">
+<Selectivity>20.0000%</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="skad">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>7.2</AverageFieldSize>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
+</Storage>
+</Class>
+
+
+<Class name="SprzedazBiletow.Dworzec">
+<SqlTableName>Dworzec</SqlTableName>
+<Super>%Persistent,%Populate</Super>
+<TimeChanged>64760,35516.367712</TimeChanged>
+<TimeCreated>64759,75594.621704</TimeCreated>
+
+<Property name="zatrudnia">
+<Type>SprzedazBiletow.Pracownik</Type>
+<Cardinality>many</Cardinality>
+<Inverse>jestZatrudniony</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="sprzedal">
+<Type>SprzedazBiletow.Bilet</Type>
+<Cardinality>many</Cardinality>
+<Inverse>jestSprzedany</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="iloscKas">
+<Type>%Integer</Type>
+<Parameter name="VALUELIST" value=",2,4,6,8"/>
+</Property>
+
+<Property name="Adres">
+<Type>Adres</Type>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^SprzedazBiletow.DworzecD</DataLocation>
+<DefaultData>DworzecDefaultData</DefaultData>
+<IdLocation>^SprzedazBiletow.DworzecD</IdLocation>
+<IndexLocation>^SprzedazBiletow.DworzecI</IndexLocation>
+<StreamLocation>^SprzedazBiletow.DworzecS</StreamLocation>
+<ExtentSize>5</ExtentSize>
+<Data name="DworzecDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>iloscKas</Value>
+</Value>
+<Value name="3">
+<Value>Adres</Value>
+</Value>
+</Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="%%ID">
+<Selectivity>1</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="Adres">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>1.8</AverageFieldSize>
+</Property>
+<Property name="iloscKas">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
+</Storage>
+</Class>
+
+
+<Class name="SprzedazBiletow.Klient">
+<SqlTableName>Klient</SqlTableName>
+<Super>%Persistent,%Populate,SprzedazBiletow.Osoba</Super>
+<TimeChanged>64760,35528.44182</TimeChanged>
+<TimeCreated>64759,65301.553514</TimeCreated>
+
+<Property name="zakupil">
+<Type>SprzedazBiletow.Bilet</Type>
+<Cardinality>many</Cardinality>
+<Inverse>jestKupiony</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="typKlienta">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Stały,Nowy"/>
+</Property>
+
+<Method name="wypiszDane">
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+  Set wynik= ..Imie_" "_..Nazwisko_" "_..typKlienta
+  #;_" "_..Adres.wypiszAdres()
+  Return wynik
+]]></Implementation>
+</Method>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^SprzedazBiletow.KlientD</DataLocation>
+<DefaultData>KlientDefaultData</DefaultData>
+<IdLocation>^SprzedazBiletow.KlientD</IdLocation>
+<IndexLocation>^SprzedazBiletow.KlientI</IndexLocation>
+<StreamLocation>^SprzedazBiletow.KlientS</StreamLocation>
+<ExtentSize>5</ExtentSize>
+<Data name="KlientDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Imie</Value>
+</Value>
+<Value name="3">
+<Value>Nazwisko</Value>
+</Value>
+<Value name="4">
+<Value>Adres</Value>
+</Value>
+<Value name="5">
+<Value>typKlienta</Value>
+</Value>
+<Value name="6">
+<Value>test1</Value>
+</Value>
+</Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="%%ID">
+<Selectivity>1</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="Adres">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="Imie">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>6.6</AverageFieldSize>
+</Property>
+<Property name="Nazwisko">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>7.8</AverageFieldSize>
+</Property>
+<Property name="typKlienta">
+<Selectivity>50.0000%</Selectivity>
+<AverageFieldSize>4.4</AverageFieldSize>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
+</Storage>
+</Class>
+
+
+<Class name="SprzedazBiletow.Osoba">
+<Abstract>1</Abstract>
+<TimeChanged>64760,29818.006541</TimeChanged>
+<TimeCreated>64759,65224.04298</TimeCreated>
+
+<Property name="Imie">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Anna,Jan,Justyna,Krzysztof"/>
+</Property>
+
+<Property name="Nazwisko">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Nowak,Mazurek,Stefanczyk,Kowal"/>
+</Property>
+
+<Property name="Adres">
+<Type>Adres</Type>
+</Property>
+
+<Method name="wypiszDane">
+<ReturnType>%String</ReturnType>
+</Method>
+</Class>
+
+
+
+
+<Class name="SprzedazBiletow.Pracownik">
+<SqlTableName>Pracownik</SqlTableName>
+<Super>%Persistent,SprzedazBiletow.Osoba,%Populate</Super>
+<TimeChanged>64760,35522.57064</TimeChanged>
+<TimeCreated>64759,73949.039324</TimeCreated>
+
+<Property name="jestZatrudniony">
+<Type>SprzedazBiletow.Dworzec</Type>
+<Cardinality>one</Cardinality>
+<Inverse>zatrudnia</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="typZatrudnienia">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",UmowaOPrace,UmowaZlecenie,UmowaODzieło"/>
+</Property>
+
+<Method name="wypiszDane">
+<ReturnType>%String</ReturnType>
+<Implementation><![CDATA[
+  Set wynik= ..Imie_" "_..Nazwisko_" "_..typZatrudnienia 
+  #; _" "_..Adres.wypiszAdres()
+  Return wynik
+]]></Implementation>
+</Method>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^SprzedazBiletow.PracownikD</DataLocation>
+<DefaultData>PracownikDefaultData</DefaultData>
+<IdLocation>^SprzedazBiletow.PracownikD</IdLocation>
+<IndexLocation>^SprzedazBiletow.PracownikI</IndexLocation>
+<StreamLocation>^SprzedazBiletow.PracownikS</StreamLocation>
+<ExtentSize>5</ExtentSize>
+<Data name="PracownikDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Imie</Value>
+</Value>
+<Value name="3">
+<Value>Nazwisko</Value>
+</Value>
+<Value name="4">
+<Value>Adres</Value>
+</Value>
+<Value name="5">
+<Value>typZatrudnienia</Value>
+</Value>
+<Value name="6">
+<Value>jestZatrudniony</Value>
+</Value>
+</Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="%%ID">
+<Selectivity>1</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="Adres">
+<Selectivity>20.0000%</Selectivity>
+<AverageFieldSize>1.4</AverageFieldSize>
+</Property>
+<Property name="Imie">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>4.8</AverageFieldSize>
+</Property>
+<Property name="Nazwisko">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>5.4</AverageFieldSize>
+</Property>
+<Property name="jestZatrudniony">
+<Selectivity>25.0000%</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="typZatrudnienia">
+<Selectivity>33.3333%</Selectivity>
+<AverageFieldSize>11.8</AverageFieldSize>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
+</Storage>
+</Class>
+
+
+<Class name="SprzedazBiletow.Znizka">
+<SqlTableName>Znizka</SqlTableName>
+<Super>%Persistent,%Populate</Super>
+<TimeChanged>64760,35506.032586</TimeChanged>
+<TimeCreated>64759,76844.268579</TimeCreated>
+
+<Property name="jestNadana">
+<Type>SprzedazBiletow.Bilet</Type>
+<Cardinality>many</Cardinality>
+<Inverse>posiada</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Property name="nazwa">
+<Type>%String</Type>
+<Parameter name="VALUELIST" value=",Studencka,Senior,RodzinaPlus"/>
+</Property>
+
+<Property name="ulga">
+<Type>%Integer</Type>
+<Parameter name="VALUELIST" value=",20,50,100"/>
+</Property>
+
+<Method name="pobierzZnizke">
+<ReturnType>%Integer</ReturnType>
+<Implementation><![CDATA[ return ..ulga
+]]></Implementation>
+</Method>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^SprzedazBiletow.ZnizkaD</DataLocation>
+<DefaultData>ZnizkaDefaultData</DefaultData>
+<IdLocation>^SprzedazBiletow.ZnizkaD</IdLocation>
+<IndexLocation>^SprzedazBiletow.ZnizkaI</IndexLocation>
+<StreamLocation>^SprzedazBiletow.ZnizkaS</StreamLocation>
+<ExtentSize>5</ExtentSize>
+<Data name="ZnizkaDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>nazwa</Value>
+</Value>
+<Value name="3">
+<Value>ulga</Value>
+</Value>
+</Data>
+<Property name="%%CLASSNAME">
+<Selectivity>100.0000%</Selectivity>
+<AverageFieldSize>1</AverageFieldSize>
+</Property>
+<Property name="%%ID">
+<Selectivity>1</Selectivity>
+<AverageFieldSize>2</AverageFieldSize>
+</Property>
+<Property name="nazwa">
+<Selectivity>50.0000%</Selectivity>
+<AverageFieldSize>7.2</AverageFieldSize>
+</Property>
+<Property name="ulga">
+<Selectivity>50.0000%</Selectivity>
+<AverageFieldSize>2.6</AverageFieldSize>
+</Property>
+<SQLMap name="IDKEY">
+<BlockCount>-4</BlockCount>
+</SQLMap>
+</Storage>
+</Class>
+</Export>
